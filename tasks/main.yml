@@ -7,18 +7,6 @@
   yum: name="@Development tools" state=present
   tags: kafka
 
-- name: create group
-  group:
-    name: kafka
-    state: present
-  tags: kafka
-
-- name: create user
-  user:
-    name: kafka
-    group: kafka
-  tags: kafka
-
 - name: Setting internal variable
   set_fact:
     kafka_name: kafka_{{ kafka.scala_version }}-{{ kafka.version }}
@@ -45,6 +33,14 @@
 
 - name: Ensure tar is extracted
   command: tar xzf /tmp/{{ kafka_name }}.tgz chdir="{{ kafka.install_dir }}"
+  tags: kafka
+
+- name: Change ownership of kafka files
+  file:
+    path: "{{ kafka.install_dir }}"
+    recurse: yes
+    owner: "kafka"
+    group: "kafka"
   tags: kafka
 
 # Config and start Kafka

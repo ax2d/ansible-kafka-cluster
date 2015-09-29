@@ -5,8 +5,7 @@ After=network.target
 
 [Service]
 User=kafka
-Environment=JAVA_HOME=/usr/local/java8
-CHDIR= {{ kafka.data_dir }}
+Environment=JAVA_HOME=/usr/java/latest
 ExecStart={{ kafka_dir }}/bin/kafka-server-start.sh {{ kafka_dir }}/config/real-server.properties
 Restart=on-abort
 
