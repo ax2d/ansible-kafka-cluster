@@ -2,7 +2,10 @@ kafka:
   version: '0.8.1.1'
   scala_version: '2.10'
   mirror: 'http://apache.cs.utah.edu'
-  data_dir: '/data8/kafka,/data9/kafka,/data10/kafka'
+  data_dirs:
+    - '/data8/kafka'
+    - '/data9/kafka'
+    - '/data10/kafka'
   install_dir: "/opt"
 
 zookeeper_client_port: "2181"
