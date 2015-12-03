@@ -17,7 +17,10 @@
 ############################# Server Basics #############################
 
 # The id of the broker. This must be set to a unique integer for each broker.
-broker.id={{ ansible_hostname|regex_replace('[a-zA-Z]+','')|int }}
+# '[a-zA-Z]+' match will leave special chars in the broker id; server1-1, will result in brokerId '1-1'
+# ''\D+' will get only digits from a string, server1-1, will result in brokerId '11'
+broker.id={{ ansible_hostname|regex_replace('\D+','')|int }}
+
 
 ############################# Socket Server Settings #############################
 
