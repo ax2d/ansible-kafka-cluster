@@ -70,5 +70,10 @@
   notify: start kafka
   tags: kafka
 
+- name: daemon-reload
+  command: systemctl daemon-reload
+  notify: start kafka
+  tags: kafka
+
 - name: Ensure kafka is started
   service: name=kafka state=started enabled=yes
